@@ -1,18 +1,18 @@
 import * as core from '@actions/core';
-import {wait} from './wait'
+import * as github from '@actions/github';
 
 async function run() {
-  try {
-    const ms = core.getInput('milliseconds');
-    console.log(`Waiting ${ms} milliseconds ...`)
 
-    core.debug((new Date()).toTimeString())
-    await wait(parseInt(ms));
-    core.debug((new Date()).toTimeString())
+  const token = core.getInput('github-token');
 
-    core.setOutput('time', new Date().toTimeString());
-  } catch (error) {
-    core.setFailed(error.message);
+  const octokit = new github.GitHub(token);
+
+  const lastComment = github.context.payload.comment;
+
+  const regex = core.getInput('filter-regex');
+
+  if (!(lastComment && lastComment.body.match(regex))) {
+    core.setFailed(`No comment matched`);
   }
 }
 

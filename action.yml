@@ -1,10 +1,12 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Filter based on comment'
+description: 'Filters actions based on a comment content'
+author: 'Jim Hester'
 inputs:
-  myInput:              # change this
-    description: 'input description here'
-    default: 'default value if applicable'
+  github-token:
+    description: 'GitHub access token'
+  filter-rexex:
+    description: 'A regular expression to filter by'
+    default: '.*'
 runs:
   using: 'node12'
   main: 'lib/main.js'
