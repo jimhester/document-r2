@@ -1,4 +1,4 @@
-name: 'Filter based on comment'
+name: 'comment-filter'
 description: 'Filters actions based on a comment content'
 author: 'Jim Hester'
 inputs:
